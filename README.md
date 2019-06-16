@@ -40,6 +40,8 @@ Since it was given, I can choose my choice of framework. I decided to go with De
 - I used the microservice framework I built around 2-3 years ago inspired from Netflix Governator and Nike's riposte (based of Netty). It was old code base and I had to change my channels to accept File Uploads in the basic framework. But framework does handle exceptions and unknown routes properly. Some changes to the framework and then microservice.
 - Using this framework, a microservice "Image Classification service" has been deployed on AWS docker container which has two endpoints as mentioned in the user requirements. If user does make calls to other endpoints, it will show a standard 404 error. 
 
+NOTE: AWS micro AMI instance was used per instructions, though building of docker container was build locally to save time. 
+
 ## Architecture
 
 
@@ -73,6 +75,45 @@ where config has the application.conf file and voc.names label file it.
 
 ## API
 
+![Alt text](screenshots/table.png?raw=true "API  Table")
+
+During the bootstrap, server might takes 2-3 minutes because of its loading the model and performing its init sequence.
+To interact with API, user needs to make an api call with an image. 
+- Make call using any rest client, to ```/predict``` api and the response will have the labels with 200 OK response 
+
+```json
+{
+    "labels": [
+        "dog"
+    ]
+}
+```
+
+- Get ```/getstatus``` call returns the current timestamp, with model version, and model summary (like how many networks)
+
+```json
+{
+    "currentTime": "Sun Jun 16 19:18:18 UTC 2019",
+    "modelVersion": "1.0",
+    "modelSummary": "\n===========================================================================================================================================================\nVertexName (VertexType)                      nIn,nOut    TotalParams   ParamsShape                                                  Vertex Inputs          \n===========================================================================================================================================================\ninput_1 (InputVertex)                        -,-         -             -                                                            -                      \nconv2d_1 (ConvolutionLayer)                  3,16        432           W:{16,3,3,3}                                                 [input_1]              \nbatch_normalization_1 (BatchNormalization)   16,16       64            gamma:{1,16}, beta:{1,16}, mean:{1,16}, var:{1,16}           [conv2d_1]             \nleaky_re_lu_1 (ActivationLayer)              -,-         0             -                                                            [batch_normalization_1]\nmax_pooling2d_1 (SubsamplingLayer)           -,-         0             -                                                            [leaky_re_lu_1]        \nconv2d_2 (ConvolutionLayer)                  16,32       4608          W:{32,16,3,3}"
+}
+```
+
+- On wrong url, user will get ```404 Error```
+```json
+{
+    "code": 404,
+    "details": "The requested URL was not found on the server.",
+    "message": "Not Found",
+    "status": "error"
+}
+```
+
+- On errors occurances, users will get a standard error message with either ```500 internal error``` or ```400 bad request```
+  - Bad Request can occur, when user didn't send a file
+  
+  - While processing a file, which is to upload to a temp directory and then performance inference, if something goes wrong during this process, then server will end up throwing ```500 internal error``` with stack trace
+  
 
 
 
