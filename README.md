@@ -12,6 +12,7 @@ Table of contents
       * [Server](#server)
    * [Architecture](#architecture)
    * [Instructions](#instructions)
+   * [API](#api)
    * [Improvements](#improvements)
    * [Alternatives](#alternatives)
       * [TensorFlow](#tensorflow) (TensorFlow Serving)
@@ -70,13 +71,21 @@ Alternativelly, to run the jar directly, once can use
 ``` java  -server -Xms256m -Xmx1024m -XX:+UseParallelOldGC -Dlog4j.configurationFile=log4j.properties -cp config:imageclassification-server-master-SNAPSHOT-withdeps.jar com.imageclassification.server.Main```
 where config has the application.conf file and voc.names label file it.
 
+## API
+
+
+
+
 ## Improvements
 Given limited time, User story was completed successfully. But I wanted to add some more automation around it, so I tried to automate the whole flow from WorkFlow that is checking out Git and spining docker container. Although a bit automation of pipeline is done by Docker files to redeploy the server, Apache Worflow is better. This can be expanded later on.
+
+![Alt text](screenshots/workflow.png?raw=true "Workflow")
+
 
 ## Alternatives
 1. ##### Tensorflow
 
-Another deployment as discussed before could have been with TensorFlow, using Flask service on top. Getting flask to run and integrating TF with it is easy vs inferences from DL4J for java applications. To showcase a powerful http server, I skipped TF.
+Another deployment as discussed before could have been with TensorFlow, using Flask service on top. Getting flask to run and integrating TF is easy. The integration between Python with TF Serving is very smooth. 
 
 2. ##### MapDB
 
@@ -84,4 +93,18 @@ Another infereces can be done through MapDB or basically in memory KV store. For
 
 ## Screenshots
 
+##### Dog Prediction using one of the example images
+![Alt text](screenshots/dog_prediction_result.png?raw=true "Dog Prediction using one of the example images")
 
+##### Get Status 
+![Alt text](screenshots/getstatus_result.png?raw=true "Get status api result")
+
+##### ERROR On POST (No File Provided)
+![Alt text](screenshots/no_file_post_error_result.png?raw=true "POST ERROR")
+
+
+##### Wrong URL on POST
+![Alt text](screenshots/wrong_url_post_result.png?raw=true "Wrong URL on POST")
+
+##### Wrong URL on Get
+![Alt text](screenshots/wrongurl_get_result.png?raw=true "Wrong URL on GET")
