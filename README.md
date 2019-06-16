@@ -108,3 +108,6 @@ Another infereces can be done through MapDB or basically in memory KV store. For
 
 ##### Wrong URL on Get
 ![Alt text](screenshots/wrongurl_get_result.png?raw=true "Wrong URL on GET")
+
+##### Running server on docker aws
+![Alt text](screenshots/aws_docker.png?raw=true "Running server on docker aws")
