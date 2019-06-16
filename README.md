@@ -10,7 +10,7 @@ Table of contents
       * [Model Selection](#model-selection)
       * [Framework](#framework)
       * [Server](#server)
-   * [Architecture](#architecture)
+   * [Design](#design)
    * [Instructions](#instructions)
    * [API](#api)
    * [Improvements](#improvements)
@@ -42,7 +42,9 @@ Since it was given, I can choose my choice of framework. I decided to go with De
 
 NOTE: AWS micro AMI instance was used per instructions, though building of docker container was build locally to save time. 
 
-## Architecture
+## Design
+![Alt text](screenshots/design.jpg?raw=true "Design")
+
 
 
 ## Instructions
