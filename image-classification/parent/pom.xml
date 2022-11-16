@@ -17,7 +17,7 @@
     <proton.version>master-SNAPSHOT</proton.version>
     <javadoc.failOnError>true</javadoc.failOnError>
     <apache.collection.version>4.3</apache.collection.version>
-    <jackson2.version>2.9.7</jackson2.version>
+    <jackson2.version>2.12.7.1</jackson2.version>
     <log4j.version>2.11.0</log4j.version>
     <slf4j.version>1.7.12</slf4j.version>
     <scala.libdep.version>2.11</scala.libdep.version>
